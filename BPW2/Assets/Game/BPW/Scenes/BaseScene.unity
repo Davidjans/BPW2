@@ -4912,13 +4912,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028db6fa3e693304d87d3cd10de62876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CurrentAP: {fileID: 0}
+  m_CurrentAP: {fileID: 250221028178284970}
   m_TurnOrderParent: {fileID: 250221028200850572}
   m_PortraitImages: []
-  m_PortraitSelected: {fileID: 0}
+  m_PortraitSelected: {fileID: 250221028820220240}
   m_AbilitiesParent: {fileID: 250221028257112305}
   m_AbilityImages: []
-  m_AbilitiesSelected: {fileID: 0}
+  m_AbilitiesSelected: {fileID: 250221028612948456}
 --- !u!1 &5324841317102430717
 GameObject:
   m_ObjectHideFlags: 0

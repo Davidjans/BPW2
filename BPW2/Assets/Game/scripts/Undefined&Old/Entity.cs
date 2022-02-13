@@ -142,7 +142,8 @@ namespace Helltament.Entities
 			}
 			m_SelectedAbility = -1;
 			UIManager.Instance.SelectAbilityUI(-1);
-			GetComponent<AIDestinationSetter>().target.position = transform.position;
+			Debug.Log("Used to set destination here");
+			//GetComponent<AIDestinationSetter>().target.position = transform.position;
 		}
 
 		public void SetAbilityValuesDeselect()

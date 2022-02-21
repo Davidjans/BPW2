@@ -34,8 +34,9 @@ public class  Grid{
                     cell.MovementCellStart();
                     m_Grid[(x, y)] = cell ;
                 }
-                m_Grid[(x,y)].CellStart(m_CreatedBy.transform.position + new Vector3(x,0,y) * m_CellSize ,m_CellSize,
-                    x+ ","+y );
+               // m_Grid[(x,y)].CellStart(m_CreatedBy.transform.position + new Vector3(x,0,y) * m_CellSize ,m_CellSize,
+               //     x+ ","+y );
+               // this is where you left off for pathfinding
             }
         }
         Vector3 beginPos = m_CreatedBy.transform.position;

@@ -9,5 +9,7 @@ EditorBuildSettings:
     path: Assets/GameContent/Scenes/MapSystem/MapGeneration.unity
     guid: ee9b99e327f499146b125a0fb8c2ceba
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 7a53e3519c7c35b4aab4ec249abbd9dc,
+      type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 1f8612695ed4ee14a82e0dd7deb6bf7a,
       type: 2}

@@ -4,11 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Unity.Mathematics;
 using Random = UnityEngine.Random;
 
 public enum TileType{Floor,Wall}
 public class DungeonGenerator : SerializedMonoBehaviour
 {
+    public GameObject m_FloorPrefab;
+    public GameObject m_WallPrefab;
+    
     public int m_GridWith = 100;
     public int m_GridHeight = 100;
     public int m_MinRoomSize = 3;
@@ -37,13 +41,14 @@ public class DungeonGenerator : SerializedMonoBehaviour
             }
             else
             {
-                //i--;
+                i--;
             }
         }
         for (int i = 0; i < m_RoomList.Count; i++)
         {
             Room currentRoom = m_RoomList[i];
             Room nextRoom = m_RoomList[(i + Random.Range(1, m_RoomList.Count)) % m_RoomList.Count];
+            ConnectRooms(currentRoom,nextRoom);
         }
 
         AllocateWalls();
@@ -79,28 +84,39 @@ public class DungeonGenerator : SerializedMonoBehaviour
         {
             Vector3Int position = new Vector3Int(x,0,posOne.z);
             if(m_Dungeon.ContainsKey(position)){continue;}
-            m_Dungeon.Add(new Vector3Int(x,0,posOne.z),TileType.Floor);
+            m_Dungeon.Add(position,TileType.Floor);
         }
         int dirZ = posTwo.z > posOne.z ? 1 : -1;
         for (int z = posOne.z; z != posTwo.z; z+= dirZ)
         {
             Vector3Int position = new Vector3Int(x,0,z);
             if(m_Dungeon.ContainsKey(position)){continue;}
-            m_Dungeon.Add(new Vector3Int(x,0,z),TileType.Floor);
+            m_Dungeon.Add(position,TileType.Floor);
         }
     }
     
     public void SpawnDungeon()
     {
-        
+        foreach (KeyValuePair<Vector3Int,TileType> kv in m_Dungeon)
+        {
+            switch (kv.Value)
+            {
+                case TileType.Floor:
+                    Instantiate(m_FloorPrefab, kv.Key, quaternion.identity, transform);
+                    break;
+                case TileType.Wall:
+                    Instantiate(m_WallPrefab, kv.Key, quaternion.identity, transform);
+                    break;
+            }
+        }
     }
     public void AddRoomToDungeon(Room room)
     {
-        for (int x = room.m_MinX; x < room.m_MaxX; x++)
+        for (int x = room.m_MinX; x <= room.m_MaxX; x++)
         {
-            for (int z = 0; room.m_MinZ < room.m_MaxZ; z++)
+            for (int z = room.m_MinZ; z<= room.m_MaxZ; z++)
             {
-                
+                if(!m_Dungeon.ContainsKey(new Vector3Int(x,0,z)))
                   m_Dungeon.Add(new Vector3Int(x,0,z), TileType.Floor);  
             }
         }
@@ -108,9 +124,9 @@ public class DungeonGenerator : SerializedMonoBehaviour
     }
     public bool CanRoomFitInDugeon(Room room)
     {
-        for (int x = room.m_MinX; x < room.m_MaxX + 2; x++)
+        for (int x = room.m_MinX -2; x < room.m_MaxX + 2; x++)
         {
-            for (int z = 0; room.m_MinZ < room.m_MaxZ +2; z++)
+            for (int z = 0 -2 ; room.m_MinZ < room.m_MaxZ +2; z++)
             {
                 if (!m_Dungeon.ContainsKey(new Vector3Int(x, 0, z)))
                     return true;
@@ -136,7 +152,7 @@ public class DungeonGenerator : SerializedMonoBehaviour
 
         public Vector3Int GetCenter()
         {
-            return new Vector3Int(Mathf.RoundToInt(Mathf.Lerp(m_MinX,m_MaxX,0.5f)), Mathf.RoundToInt(Mathf.Lerp(m_MinZ,m_MaxZ, 0.5f)));
+            return new Vector3Int(Mathf.RoundToInt(Mathf.Lerp(m_MinX,m_MaxX,0.5f)),0, Mathf.RoundToInt(Mathf.Lerp(m_MinZ,m_MaxZ, 0.5f)));
         }
     }
     

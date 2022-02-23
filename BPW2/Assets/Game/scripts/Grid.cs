@@ -3,18 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+[Serializable]
 public class  Grid{
     public float m_CellSize = 1;
     public Vector2 m_GridSize = new Vector2(5, 5);
     public Dictionary<(int x, int y), GridCell> m_Grid = new Dictionary<(int x, int y), GridCell>();
     public MonoBehaviour m_CreatedBy;
-
-    public Grid(MonoBehaviour createdBy, float cellSize, Vector2 gridSize)
+    public string m_CellType;
+    public Grid(MonoBehaviour createdBy, float cellSize, Vector2 gridSize,string cellType)
     {
         m_CreatedBy = createdBy;
         m_CellSize = cellSize;
         m_GridSize = gridSize;
-        CreateGridInDictionary();
+        m_CellType = cellType;
+        CreateGridInDictionary(cellType);
     }
     [Button]
     public void CreateGridInDictionary(string typeOfCellToCreate = nameof(GridCell))
@@ -34,9 +36,8 @@ public class  Grid{
                     cell.MovementCellStart();
                     m_Grid[(x, y)] = cell ;
                 }
-               // m_Grid[(x,y)].CellStart(m_CreatedBy.transform.position + new Vector3(x,0,y) * m_CellSize ,m_CellSize,
-               //     x+ ","+y );
-               // this is where you left off for pathfinding
+                m_Grid[(x,y)].CellStart(this,m_CreatedBy.transform.position + new Vector3(x,0,y) * m_CellSize ,m_CellSize,
+                    x+ ","+y,new Vector2Int(x,y) );
             }
         }
         Vector3 beginPos = m_CreatedBy.transform.position;
@@ -47,17 +48,14 @@ public class  Grid{
     }
     
     [Button]
-    public Vector2 GetXYBasedOnWorldPos(Vector3 position)
+    public Vector2Int GetXYBasedOnWorldPos(Vector3 position)
     {
         position -= m_CreatedBy.transform.position;
         int x, y;
         x = (int)Mathf.Clamp(Mathf.FloorToInt(position.x / m_CellSize),0,m_GridSize.x);
         y = (int)Mathf.Clamp(Mathf.FloorToInt(position.z / m_CellSize),0,m_GridSize.y);
-        Debug.LogError(position );
-        Debug.LogError( "x" +Mathf.FloorToInt(position.x / m_CellSize) );
-        Debug.LogError("Y" +Mathf.FloorToInt(position.z / m_CellSize) );
         Debug.LogError(x + " " + y );
-        return new Vector2(x, y);
+        return new Vector2Int(x, y);
     }
 
     public GridCell GetCellOnPosition<T>(Vector3 position)

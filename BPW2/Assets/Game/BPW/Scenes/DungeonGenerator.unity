@@ -265,8 +265,12 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  m_GridWith: 100
-  m_GridHeight: 100
+  m_FloorPrefab: {fileID: 7273537996643087208, guid: cdce4a81119ef08489e00181cdb05067,
+    type: 3}
+  m_WallPrefab: {fileID: 2922418110465815661, guid: f77ac01299ac5b74cb8b94e33a98ce2f,
+    type: 3}
+  m_GridWith: 60
+  m_GridHeight: 60
   m_MinRoomSize: 3
   m_MaxRoomSize: 7
   m_NumRooms: 10

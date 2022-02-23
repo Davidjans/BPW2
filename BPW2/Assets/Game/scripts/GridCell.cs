@@ -9,10 +9,10 @@ public class GridCell
     public Vector3 m_WorldPosition;
     public float m_CellSize;
     public string m_CellValue = "0";
-    public Vector2 m_CellDictionaryPosition;
+    public Vector2Int m_CellDictionaryPosition;
     public TextMeshPro m_CellText;
     public Grid m_Owner;
-    public void CellStart(Grid owner, Vector3 worldPosition, float cellSize,string cellValue,Vector2 cellPosition)
+    public void CellStart(Grid owner, Vector3 worldPosition, float cellSize,string cellValue,Vector2Int cellPosition)
     {
         m_WorldPosition = worldPosition;
         m_CellSize = cellSize;

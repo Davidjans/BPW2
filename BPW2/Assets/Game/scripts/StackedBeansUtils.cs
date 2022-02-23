@@ -191,6 +191,45 @@ using TMPro;
             return (Time.realtimeSinceStartup - startTime) * 1000f;
         }
         
+        public static Vector3 GetMouseWorldPosition() {
+            Vector3 vec = GetMouseWorldPositionWithZ(Input.mousePosition, Camera.main);
+            vec.z = 0f;
+            return vec;
+        }
+
+        public static Vector3 GetMouseWorldPositionWithZ() {
+            return GetMouseWorldPositionWithZ(Input.mousePosition, Camera.main);
+        }
+
+        public static Vector3 GetMouseWorldPositionWithZ(Camera worldCamera) {
+            return GetMouseWorldPositionWithZ(Input.mousePosition, worldCamera);
+        }
+
+        public static Vector3 GetMouseWorldPositionWithZ(Vector3 screenPosition, Camera worldCamera)
+        {
+            Vector3 mousePos = screenPosition;
+            mousePos.z = worldCamera.nearClipPlane;
+            Vector3 worldPosition = worldCamera.ScreenToWorldPoint(mousePos);
+            return worldPosition;
+        }
+        
+        public static Vector3 GetMouseWorldPositionWithRay()
+        {
+            Plane plane = new Plane(Vector3.up, 0);
+            float distance;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Vector3 worldPosition = Vector3.zero;
+            if (plane.Raycast(ray, out distance))
+            {
+                worldPosition = ray.GetPoint(distance);
+            }
+            return worldPosition;
+        }
+        
+        public static Vector3 GetDirToMouse(Vector3 fromPosition) {
+            Vector3 mouseWorldPosition = GetMouseWorldPosition();
+            return (mouseWorldPosition - fromPosition).normalized;
+        }
         public static void ShuffleArray<T>(T[] arr, int iterations) {
             for (int i = 0; i < iterations; i++) {
                 int rnd = UnityEngine.Random.Range(0, arr.Length);

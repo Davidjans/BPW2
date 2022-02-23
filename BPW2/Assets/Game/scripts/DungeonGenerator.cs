@@ -68,7 +68,7 @@ public class DungeonGenerator : SerializedMonoBehaviour
                     if(Mathf.Abs(x) == Mathf.Abs(z)){continue;}
                     Vector3Int newPos = kvp + new Vector3Int(x, 0, z);
                     if(m_Dungeon.ContainsKey(newPos)){continue;}
-                    m_Dungeon.Add(newPos,TileType.Wall);
+                        m_Dungeon.Add(newPos,TileType.Wall);
 
                 }
             }
@@ -84,14 +84,14 @@ public class DungeonGenerator : SerializedMonoBehaviour
         {
             Vector3Int position = new Vector3Int(x,0,posOne.z);
             if(m_Dungeon.ContainsKey(position)){continue;}
-            m_Dungeon.Add(position,TileType.Floor);
+                m_Dungeon.Add(position,TileType.Floor);
         }
         int dirZ = posTwo.z > posOne.z ? 1 : -1;
         for (int z = posOne.z; z != posTwo.z; z+= dirZ)
         {
             Vector3Int position = new Vector3Int(x,0,z);
             if(m_Dungeon.ContainsKey(position)){continue;}
-            m_Dungeon.Add(position,TileType.Floor);
+                m_Dungeon.Add(position,TileType.Floor);
         }
     }
     

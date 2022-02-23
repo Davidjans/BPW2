@@ -429,11 +429,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 1717685776}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d52b996485eaf15488ca4802222c387b, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ca49d90b922fe84f9183998625fe810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: m_DebugDictionary
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.ValueTuple`2[[System.Int32,
+        mscorlib],[System.Int32, mscorlib]], mscorlib],[GridCell, Assembly-CSharp]],
+        mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.ValueTuple`2[[System.Int32,
+        mscorlib],[System.Int32, mscorlib]], mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  m_MoveStraightCost: 10
+  m_MoveDiagonalCost: 14
   m_CellSize: 1
-  m_GridSize: {x: 20, y: 20}
+  m_GridSize: {x: 5, y: 5}
+  m_Grid:
+    m_CellSize: 0
+    m_GridSize: {x: 0, y: 0}
+    m_CreatedBy: {fileID: 0}
+    m_CellType: 
 --- !u!4 &1717685778
 Transform:
   m_ObjectHideFlags: 0
@@ -526,8 +563,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1969122199}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.67237324, y: -0.0000044507906, z: 0.000004730984, w: 0.74021226}
+  m_LocalPosition: {x: -5.7277126, y: 5.0482635, z: 6.049123}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4853,7 +4890,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5228116211497552247
 Transform:
   m_ObjectHideFlags: 0

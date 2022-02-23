@@ -33,7 +33,6 @@ public class  Grid{
                 else if (typeOfCellToCreate == nameof(MovementCell))
                 {
                     MovementCell cell = new MovementCell();
-                    cell.MovementCellStart();
                     m_Grid[(x, y)] = cell ;
                 }
                 m_Grid[(x,y)].CellStart(this,m_CreatedBy.transform.position + new Vector3(x,0,y) * m_CellSize ,m_CellSize,

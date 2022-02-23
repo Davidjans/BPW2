@@ -12,7 +12,7 @@ public class GridCell
     public Vector2Int m_CellDictionaryPosition;
     public TextMeshPro m_CellText;
     public Grid m_Owner;
-    public void CellStart(Grid owner, Vector3 worldPosition, float cellSize,string cellValue,Vector2Int cellPosition)
+    public virtual void CellStart(Grid owner, Vector3 worldPosition, float cellSize,string cellValue,Vector2Int cellPosition)
     {
         m_WorldPosition = worldPosition;
         m_CellSize = cellSize;

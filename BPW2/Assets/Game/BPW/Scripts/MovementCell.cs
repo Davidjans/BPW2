@@ -15,7 +15,11 @@ public class MovementCell : GridCell
         base.CellStart(owner,worldPosition,cellSize,cellValue, cellPosition);
         CheckOnWhatWorldObject();
     }
-
+    
+    protected override async void CreateCellText()
+    {
+    }
+    
     public void CalculateFCost()
     {
         m_FCost = m_GCost + m_HCost;
@@ -23,26 +27,32 @@ public class MovementCell : GridCell
 
     public void CheckOnWhatWorldObject()
     {
-        Vector3 worldPosToCheck = m_WorldPosition;
+        Vector3 worldPosToCheck = GetCellCenter();
         worldPosToCheck.y += 50;
-        worldPosToCheck += (new Vector3(1, 0, 1) * m_CellSize) * 0.5f;
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
+        Debug.DrawRay(worldPosToCheck,Vector3.down * 1000f,Color.red, 1000f);
         if (Physics.Raycast(worldPosToCheck, Vector3.down, out hit, Mathf.Infinity))
         {
            m_AboveWorldObject = hit.transform.gameObject.GetComponent<WorldObject>();
            if (m_AboveWorldObject != null)
            {
+               
                Debug.LogError(m_CellDictionaryPosition.x + " " + m_CellDictionaryPosition.y + "  is on world object" + m_AboveWorldObject.name);
            }
            else
            {
                Debug.LogError(m_CellDictionaryPosition.x + " " + m_CellDictionaryPosition.y + "  is not on any world object");
            }
+
+           m_WorldPosition.y = hit.point.y;
         }
         else
         {
             Debug.LogError(m_CellDictionaryPosition.x + " " + m_CellDictionaryPosition.y + "  Did not hit anything");
         }
+
+        m_WorldPosition.y += 0.001f;
+        base.CreateCellText();
     }
 }   

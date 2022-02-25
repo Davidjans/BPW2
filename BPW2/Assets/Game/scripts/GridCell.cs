@@ -24,13 +24,16 @@ public class GridCell
 
     private async void CellCreation()
     {
+        CreateCellText();
+        DrawDebugSquare();
+    }
+
+    protected virtual async void CreateCellText()
+    {
         m_CellText = await StackedBeansUtils.CreateWorldTextMeshPro(null, m_CellValue,m_WorldPosition + new Vector3(m_CellSize,0,m_CellSize) * 0.5f,Color.white, 8);
-        DrawSquare();
     }
     
-    
-    
-    public void DrawSquare()
+    public void DrawDebugSquare()
     {
         Debug.DrawLine(m_WorldPosition,new Vector3(m_WorldPosition.x,m_WorldPosition.y ,m_WorldPosition.z+m_CellSize)
             ,Color.white, 100f);
@@ -41,5 +44,10 @@ public class GridCell
     public void OnDestroy()
     {
         GameObject.DestroyImmediate(m_CellText.gameObject);
+    }
+
+    public Vector3 GetCellCenter()
+    {
+        return m_WorldPosition + (new Vector3(1, 0, 1) * m_CellSize) * 0.5f;
     }
 }

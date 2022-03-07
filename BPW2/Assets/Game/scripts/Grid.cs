@@ -53,7 +53,7 @@ public class  Grid{
         int x, y;
         x = (int)Mathf.Clamp(Mathf.FloorToInt(position.x / m_CellSize),0,m_GridSize.x);
         y = (int)Mathf.Clamp(Mathf.FloorToInt(position.z / m_CellSize),0,m_GridSize.y);
-        Debug.LogError(x + " " + y );
+        //Debug.LogError(x + " " + y );
         return new Vector2Int(x, y);
     }
 

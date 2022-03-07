@@ -48,6 +48,23 @@ using TMPro;
             textMesh.GetComponent<MeshRenderer>().sortingOrder = sortingOrder;
             return textMesh;
         }
+        
+        public static  async UniTask<GameObject> CreateWorldImage(Transform parent, String materialName, Vector3 worldPosition, Vector3 worldRotation,int scale = 1, int sortingOrder = 5000) 
+        {
+            Material material = await Addressables.LoadAssetAsync<Material>(materialName).Task;
+            GameObject gameObject = await Addressables.LoadAssetAsync<GameObject>("BaseSprite").Task;
+            gameObject = GameObject.Instantiate(gameObject);
+            Transform transform = gameObject.transform;
+            transform.SetParent(parent, false);
+            transform.position = worldPosition;
+            transform.eulerAngles = worldRotation;
+            MeshRenderer image = gameObject.GetComponent<MeshRenderer>();
+            image.material = material;
+            image.transform.localScale *= scale;
+            
+            return gameObject;
+        }
+        
         public static int GetAngleFromVector180(Vector3 dir) {
             dir = dir.normalized;
             float n = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;

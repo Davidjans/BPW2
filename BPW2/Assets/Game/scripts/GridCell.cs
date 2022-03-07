@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 using Unity.Mathematics;
 
 public class GridCell
@@ -12,6 +13,7 @@ public class GridCell
     public Vector2Int m_CellDictionaryPosition;
     public TextMeshPro m_CellText;
     public Grid m_Owner;
+    public GameObject m_CellImage;
     public virtual void CellStart(Grid owner, Vector3 worldPosition, float cellSize,string cellValue,Vector2Int cellPosition)
     {
         m_WorldPosition = worldPosition;
@@ -25,12 +27,17 @@ public class GridCell
     private async void CellCreation()
     {
         CreateCellText();
-        DrawDebugSquare();
+        // DrawDebugSquare();
     }
 
     protected virtual async void CreateCellText()
     {
-        m_CellText = await StackedBeansUtils.CreateWorldTextMeshPro(null, m_CellValue,m_WorldPosition + new Vector3(m_CellSize,0,m_CellSize) * 0.5f,Color.white, 8);
+        m_CellText = await StackedBeansUtils.CreateWorldTextMeshPro(null, m_CellValue,GetCellCenter(),Color.white, 8);
+    }
+    
+    protected virtual async void CreateSprite()
+    {
+        m_CellImage = await StackedBeansUtils.CreateWorldImage(null, "GridIndicator",GetCellCenter(), new Vector3(90,0,0), 1);
     }
     
     public void DrawDebugSquare()

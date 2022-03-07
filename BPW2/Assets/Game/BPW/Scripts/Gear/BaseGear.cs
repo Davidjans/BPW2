@@ -1,0 +1,146 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
+using UnityEngine;
+using Sirenix.OdinInspector;
+using Random = UnityEngine.Random;
+
+[CreateAssetMenu(fileName = "Gear", menuName = "Gear/BaseGear", order = 1)]
+public class BaseGear : SerializedScriptableObject
+{
+	public string m_BaseGearName;
+	public int m_BaseGearID;
+	public uint m_UniqueGearID;
+	public int m_GearLevel = 1;
+	public string m_TypeName;
+	public bool m_InLoadout = false;
+	
+	[JsonIgnore]
+	public GameObject m_LinkedGameObject;
+	
+	[JsonIgnore]
+	public List<LoadoutSlots> m_AllowedLoadoutSlots = new List<LoadoutSlots>();
+	
+	[JsonIgnore]
+	public Sprite m_GearSprite;
+	
+	[JsonIgnore] 
+	public BaseGear m_OriginalGearLink;
+	
+	[HideInEditorMode] public bool m_FirstCreation = true;
+
+	
+	[MinMaxSlider(0, 500, true)] public Vector2 m_AllocationRange = new Vector2(0, 50);
+	[HideInEditorMode] public float m_AllocationPoints;
+
+	private List<bool> m_PurchaseAllows;
+	
+	
+	[Button]
+	private void Awake()
+	{
+		if (m_FirstCreation)
+		{
+			OnCreate();
+		}
+	}
+
+	public void LoadOriginalStats()
+	{
+		if (m_OriginalGearLink != null)
+		{
+			Debug.LogError("Already did that");
+			return;
+		}
+		foreach (var gear in GearOverview.Instance.AllGear)
+		{
+			if (gear.m_BaseGearName == m_BaseGearName )
+			{
+				m_BaseGearID = gear.m_BaseGearID;
+				m_OriginalGearLink = gear;
+				m_LinkedGameObject = gear.m_LinkedGameObject;
+			}
+		}
+
+		if (m_OriginalGearLink == null)
+		{
+			Debug.LogError("The fuck it didn't find any");
+			return;
+		}
+		m_AllowedLoadoutSlots = m_OriginalGearLink.m_AllowedLoadoutSlots;
+	}
+	public void LoadSprite()
+	{
+		m_GearSprite = Resources.Load<Sprite>("Icons/Icon_" + m_BaseGearName);
+	}
+
+	[Button]
+	private void OnCreate()
+	{
+		CreateBaseID();
+		m_FirstCreation = false;
+		m_TypeName = GetType().Name;
+	}
+	public void CreateBaseID()
+	{
+		GearOverview.Instance.UpdateGearOverview();
+		m_BaseGearID = GearOverview.Instance.AllGear.Length;
+	}
+	public void CreateUniqueID()
+	{
+		if (m_UniqueGearID == 0)
+		{
+			m_UniqueGearID = (uint)Random.Range(0, int.MaxValue);
+		}
+	}
+
+	public virtual void GenerateRandomGear()
+	{
+		m_PurchaseAllows = new List<bool>();
+		SetBaseValues();
+
+		m_PurchaseAllows = AddPurchaseAllows();
+		
+		m_AllocationPoints = Mathf.RoundToInt(Random.Range(m_AllocationRange.x, m_AllocationRange.y));
+		while (m_AllocationPoints > 0)
+		{
+			int itemToPurchase = Random.Range(0, m_PurchaseAllows.Count);
+			if (m_PurchaseAllows[itemToPurchase])
+			{
+				PurchaseUpgrade(itemToPurchase);
+				m_AllocationPoints--;
+			}
+		}
+		SetGearValues();
+	}
+	
+	protected  virtual List<bool> AddPurchaseAllows()
+	{
+		List<bool> purchaseAllows = new List<bool>();
+		/*for (int i = 0; i < Enum.GetValues(typeof(RangedWeaponUpgradeFeature)).Length; i++)
+		{
+			m_PurchaseAllows.Add(true);
+		}*/
+		return purchaseAllows;
+	}
+
+	protected virtual void PurchaseUpgrade(int thingToUpgrade)
+	{
+		/*RangedWeaponUpgradeFeature upgradeFeature = (RangedWeaponUpgradeFeature)thingToUpgrade;
+		switch (upgradeFeature)
+		{
+			default:
+				throw new ArgumentOutOfRangeException();
+		}*/
+	}
+	protected virtual void SetBaseValues()
+	{
+	}
+
+	protected virtual void SetGearValues()
+	{
+	}
+}

@@ -25,6 +25,14 @@ MonoBehaviour:
     m_Address: BaseSprite
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: bccbe435909f30a4f844c0ab10fb1c8c
+    m_Address: GridIndicator
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 53beb45ae6bc68d41b0c42c88970ae0f
+    m_Address: GridIndicatorSelected
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 1460457df4709b747965598b534728be, type: 2}
   m_SchemaSet:

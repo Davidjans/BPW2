@@ -45,6 +45,7 @@ public class UIManager : MonoBehaviour
 	
 	[FoldoutGroup("CombatUI/Abilities")] public Transform m_AbilitiesSelected;
 
+	public Transform m_WorldSpaceCanvas;
 	// Start is called before the first frame update
 	void Awake()
     {

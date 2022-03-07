@@ -18,6 +18,7 @@ public class PathfindingManager : SerializedMonoBehaviour
     private Grid m_Grid;
 
     public Dictionary<(int, int), GridCell> m_DebugDictionary;
+    private MovementCell m_CurrentlyHoveringOver;
     void Start()
     {
         m_Grid = new Grid(this,m_CellSize,m_GridSize,nameof(MovementCell));
@@ -25,12 +26,23 @@ public class PathfindingManager : SerializedMonoBehaviour
     }
 
     private void Update()
-    {
+    {   
+        Vector3 mouseWorldPosition = StackedBeansUtils.GetMouseWorldPositionWithRay();
+        Vector2Int xYPos =  m_Grid.GetXYBasedOnWorldPos(mouseWorldPosition);
+        if (m_Grid.m_Grid.ContainsKey((xYPos.x, xYPos.y)))
+        {
+            MovementCell cell = (MovementCell)m_Grid.m_Grid[(xYPos.x, xYPos.y)];
+            if (m_CurrentlyHoveringOver != cell)
+            {
+                m_CurrentlyHoveringOver?.OnMouseHoverExit();
+                cell.OnMouseHoverEnter();
+            }
+            m_CurrentlyHoveringOver = cell;
+            cell.OnMouseHover();
+        }
+        
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 mouseWorldPosition = StackedBeansUtils.GetMouseWorldPositionWithRay();
-            Vector2Int xYPos =  m_Grid.GetXYBasedOnWorldPos(mouseWorldPosition);
-            //Debug.LogError(mouseWorldPosition);
             List<MovementCell> path = FindPath(0, 0, xYPos.x, xYPos.y);
             if (path != null)
             {
@@ -93,6 +105,11 @@ public class PathfindingManager : SerializedMonoBehaviour
             foreach (MovementCell neighbourCell in GetNeighbourList(currentCell))
             {
                 if (m_ClosedList.Contains(neighbourCell)) continue;
+                if (!neighbourCell.m_AboveWorldObject.m_IsWalkable)
+                {
+                    m_ClosedList.Add(neighbourCell);
+                    continue;
+                }
                 int tentativeGCost = currentCell.m_GCost + CalculateDistanceCost(currentCell, neighbourCell);
                 if (tentativeGCost < neighbourCell.m_GCost)
                 {

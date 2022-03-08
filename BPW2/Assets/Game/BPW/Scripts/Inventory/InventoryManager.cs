@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Sirenix.OdinInspector;
@@ -47,11 +48,11 @@ public class InventoryManager : MonoBehaviour
 		//var jsonFormatter = config.Formatters.JsonFormatter;
 		//jsonFormatter.SerializerSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
 		LoadInventory();
+		VisualInventoryManager.Instance.SetVisualInventory();
 	}
 	[Button]
 	public void LoadInventory()
 	{
-
 		string fileName = "PlayerInventory";
 		if (SaveManager.CheckJsonExistence(fileName))
 		{

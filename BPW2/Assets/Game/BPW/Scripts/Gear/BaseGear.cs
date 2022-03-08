@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "Gear", menuName = "Gear/BaseGear", order = 1)]
@@ -72,9 +75,24 @@ public class BaseGear : SerializedScriptableObject
 		}
 		m_AllowedLoadoutSlots = m_OriginalGearLink.m_AllowedLoadoutSlots;
 	}
-	public void LoadSprite()
+	public async void LoadSprite()
 	{
-		m_GearSprite = Resources.Load<Sprite>("Icons/Icon_" + m_BaseGearName);
+		if (m_GearSprite != null) return;
+		//Sprite sprite =  await LoadSpriteAsync();
+		Sprite sprite =  await UniTask. LoadSpriteAsync();
+		
+			m_GearSprite = sprite;
+	}
+
+	private async UniTask<Sprite> LoadSpriteAsync()
+	{
+		AsyncOperationHandle<Sprite> handle = Addressables.LoadAssetAsync<Sprite>(m_BaseGearName + "Icon");
+		await handle.Task;
+		if(handle.Status == AsyncOperationStatus.Succeeded)
+		{
+			return handle.Result;
+		}
+		return null;
 	}
 
 	[Button]

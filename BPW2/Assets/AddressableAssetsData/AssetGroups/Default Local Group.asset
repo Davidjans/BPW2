@@ -33,6 +33,10 @@ MonoBehaviour:
     m_Address: GridIndicatorSelected
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 0c4164dc68deefb479d1a2b7f111a193
+    m_Address: CumZoneIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 1460457df4709b747965598b534728be, type: 2}
   m_SchemaSet:

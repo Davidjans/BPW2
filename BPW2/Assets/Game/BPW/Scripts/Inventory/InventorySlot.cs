@@ -6,7 +6,6 @@ using TMPro;
 using UnityEngine.UI;
 public class InventorySlot : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI m_ItemLevelText;
     [SerializeField] private Image m_ItemIcon;
     public BaseGear m_ItemInHere;
     public LoadoutSlots m_SlotType = LoadoutSlots.Inventory;
@@ -14,21 +13,18 @@ public class InventorySlot : MonoBehaviour
     {
         m_ItemInHere = null;
         m_ItemIcon.sprite = null;
-        m_ItemLevelText.text = null;
         m_ItemIcon.gameObject.SetActive(false);
     }
     public void LoadItem(BaseGear gearInHere)
     {
         m_ItemInHere = gearInHere;
         m_ItemIcon.sprite = gearInHere.m_GearSprite;
-        m_ItemLevelText.text = gearInHere.m_GearLevel.ToString();
         m_ItemIcon.gameObject.SetActive(true);
     }
     public void UnLoadItem()
     {
         m_ItemInHere = null;
         m_ItemIcon.sprite = null;
-        m_ItemLevelText.text ="";
         m_ItemIcon.gameObject.SetActive(false);
     }
     [Button]

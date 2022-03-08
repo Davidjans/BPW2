@@ -1,20 +1,49 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 public class VisualInventoryManager : MonoBehaviour
 {
+    #region Instancing
+    public static VisualInventoryManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<VisualInventoryManager>();
+                if (_instance == null)
+                {
+                    _instance = new GameObject("VisualInventoryManager").AddComponent<VisualInventoryManager>();
+                }
+            }
+            return _instance;
+        }
+    }
+
+    private static VisualInventoryManager _instance;
+
+    void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        if (_instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+    }
+    #endregion
     public List<InventorySlot> m_InventorySlots = new List<InventorySlot>();
     public InventorySlot m_SelectedSlot;
     public InventorySlot m_PreviouslySelectedSlot;
     public Image m_SelectedItemImage;
-    [Button]
-    private void Start()
-    {
-        SetVisualInventory();
-    }
+   
 
     public void SetVisualInventory()
     {
@@ -26,7 +55,7 @@ public class VisualInventoryManager : MonoBehaviour
                 break;
             }
         }
-        InventoryManager.Instance.LoadInventory();
+        //InventoryManager.Instance.LoadInventory();
         for (int i = 0; i < InventoryManager.Instance.m_OwnedGear.Count; i++)
         {
             m_InventorySlots[i].LoadItem(InventoryManager.Instance.m_OwnedGear[i]);
@@ -76,8 +105,12 @@ public class VisualInventoryManager : MonoBehaviour
             m_PreviouslySelectedSlot.UnLoadItem();
         }
     }
-    
-    
+    [Button]
+    public void GetAllChildrenSlots()
+    {
+        m_InventorySlots.Clear();
+        m_InventorySlots = GetComponentsInChildren<InventorySlot>().ToList();
+    }
     public void UnSelectSlot()
     {
         

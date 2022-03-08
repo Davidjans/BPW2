@@ -11,6 +11,8 @@ public class InventorySlot : MonoBehaviour
     public LoadoutSlots m_SlotType = LoadoutSlots.Inventory;
     public void ClearSlot()
     {
+        if(m_ItemInHere != null)
+            m_ItemInHere.m_InInventorySlot = null;
         m_ItemInHere = null;
         m_ItemIcon.sprite = null;
         m_ItemIcon.gameObject.SetActive(false);
@@ -19,7 +21,13 @@ public class InventorySlot : MonoBehaviour
     {
         m_ItemInHere = gearInHere;
         m_ItemIcon.sprite = gearInHere.m_GearSprite;
+        gearInHere.m_InInventorySlot = this;
         m_ItemIcon.gameObject.SetActive(true);
+    }
+
+    public void LoadItemVisual()
+    {
+        m_ItemIcon.sprite = m_ItemInHere.m_GearSprite;
     }
     public void UnLoadItem()
     {

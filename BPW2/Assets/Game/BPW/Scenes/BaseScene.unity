@@ -993,9 +993,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_OwnedGear:
-  - {fileID: 583698243}
+  - {fileID: 1859149250}
   m_OwnedGearJsons:
-  - '{"m_BaseGearName":"CumZone","m_BaseGearID":1,"m_UniqueGearID":53575639,"m_GearLevel":1,"m_TypeName":"BaseGear","m_InLoadout":false,"m_FirstCreation":false,"m_AllocationRange":{"x":0.0,"y":50.0},"m_AllocationPoints":0.0,"name":"CumZone","hideFlags":0}'
+  - '{"m_BaseGearName":"CumZone","m_BaseGearID":1,"m_UniqueGearID":744048888,"m_GearLevel":1,"m_TypeName":"BaseGear","m_InLoadout":false,"m_FirstCreation":false,"m_AllocationRange":{"x":0.0,"y":50.0},"m_AllocationPoints":0.0,"name":"CumZone","hideFlags":0}'
   m_AssociatedGear: []
 --- !u!1001 &529626649
 PrefabInstance:
@@ -1369,40 +1369,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95af7440ca552634ba42cefb05387e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &583698243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9478e25de18f26b43b8e660241ba403d, type: 3}
-  m_Name: CumZone
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes: []
-  m_BaseGearName: CumZone
-  m_BaseGearID: 1
-  m_UniqueGearID: 53575639
-  m_GearLevel: 1
-  m_TypeName: BaseGear
-  m_InLoadout: 0
-  m_LinkedGameObject: {fileID: 0}
-  m_AllowedLoadoutSlots: 
-  m_GearSprite: {fileID: 0}
-  m_OriginalGearLink: {fileID: 0}
-  m_FirstCreation: 0
-  m_AllocationRange: {x: 0, y: 50}
-  m_AllocationPoints: 0
 --- !u!114 &632802262 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7255027617448336236, guid: 745374c471bbf2f48906e8e5136da8a7,
@@ -2650,6 +2616,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95af7440ca552634ba42cefb05387e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1859149250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9478e25de18f26b43b8e660241ba403d, type: 3}
+  m_Name: CumZone
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  m_BaseGearName: CumZone
+  m_BaseGearID: 0
+  m_UniqueGearID: 744048888
+  m_GearLevel: 1
+  m_TypeName: BaseGear
+  m_InLoadout: 0
+  m_LinkedGameObject: {fileID: 0}
+  m_AllowedLoadoutSlots: 
+  m_GearSprite: {fileID: 21300000, guid: 0c4164dc68deefb479d1a2b7f111a193, type: 3}
+  m_OriginalGearLink: {fileID: 11400000, guid: 0b75d5471dda6e5469dd8726702a2f09, type: 2}
+  m_InInventorySlot: {fileID: 0}
+  m_FirstCreation: 0
+  m_AllocationRange: {x: 0, y: 50}
+  m_AllocationPoints: 0
 --- !u!1001 &1900529683
 PrefabInstance:
   m_ObjectHideFlags: 0

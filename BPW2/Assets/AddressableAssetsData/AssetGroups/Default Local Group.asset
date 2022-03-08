@@ -37,6 +37,10 @@ MonoBehaviour:
     m_Address: CumZoneIcon
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: f183dbe7a0bd7f848bd8e131ca7f03e3
+    m_Address: SwordIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 1460457df4709b747965598b534728be, type: 2}
   m_SchemaSet:

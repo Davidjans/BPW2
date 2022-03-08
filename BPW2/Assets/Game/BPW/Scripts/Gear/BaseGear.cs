@@ -32,6 +32,9 @@ public class BaseGear : SerializedScriptableObject
 	
 	[JsonIgnore] 
 	public BaseGear m_OriginalGearLink;
+
+	[JsonIgnore] 
+	public InventorySlot m_InInventorySlot;
 	
 	[HideInEditorMode] public bool m_FirstCreation = true;
 
@@ -79,9 +82,10 @@ public class BaseGear : SerializedScriptableObject
 	{
 		if (m_GearSprite != null) return;
 		//Sprite sprite =  await LoadSpriteAsync();
-		Sprite sprite =  await UniTask. LoadSpriteAsync();
+		await LoadSpriteAsync();
 		
-			m_GearSprite = sprite;
+		m_InInventorySlot?.LoadItemVisual();
+			
 	}
 
 	private async UniTask<Sprite> LoadSpriteAsync()
@@ -90,7 +94,7 @@ public class BaseGear : SerializedScriptableObject
 		await handle.Task;
 		if(handle.Status == AsyncOperationStatus.Succeeded)
 		{
-			return handle.Result;
+			m_GearSprite = handle.Result;
 		}
 		return null;
 	}

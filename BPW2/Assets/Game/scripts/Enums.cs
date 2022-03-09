@@ -1,12 +1,16 @@
-public enum LoadoutSlots
+public enum EquipmentSlot
 {
-    BackSlot,
-    HolsterSlotOne,
-    HolsterSlotTwo,
-    SupportGearOne,
-    SupportGearTwo,
-    GadgetOne,
-    GadgetTwo,
-    Backpack,
+    Head,
+    Chest,
+    Hand,
+    Legs,
+    Feet,
+    Back,
+    Shoulder,
+    Necklace,
+    RingOne,
+    RingTwo,
+    RWeapon,
+    LWeapon,
     Inventory
 }

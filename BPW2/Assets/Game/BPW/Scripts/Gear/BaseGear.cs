@@ -9,6 +9,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "Gear", menuName = "Gear/BaseGear", order = 1)]
@@ -25,7 +26,7 @@ public class BaseGear : SerializedScriptableObject
 	public GameObject m_LinkedGameObject;
 	
 	[JsonIgnore]
-	public List<LoadoutSlots> m_AllowedLoadoutSlots = new List<LoadoutSlots>();
+	public List<EquipmentSlot> m_AllowedEquipmentSlots = new List<EquipmentSlot>();
 	
 	[JsonIgnore]
 	public Sprite m_GearSprite;
@@ -76,7 +77,7 @@ public class BaseGear : SerializedScriptableObject
 			Debug.LogError("The fuck it didn't find any");
 			return;
 		}
-		m_AllowedLoadoutSlots = m_OriginalGearLink.m_AllowedLoadoutSlots;
+		m_AllowedEquipmentSlots = m_OriginalGearLink.m_AllowedEquipmentSlots;
 	}
 	public async void LoadSprite()
 	{

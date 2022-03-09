@@ -8,13 +8,15 @@ public class InventorySlot : MonoBehaviour
 {
     [SerializeField] private Image m_ItemIcon;
     public BaseGear m_ItemInHere;
-    public LoadoutSlots m_SlotType = LoadoutSlots.Inventory;
+    public EquipmentSlot m_SlotType = EquipmentSlot.Inventory;
     public void ClearSlot()
     {
         if(m_ItemInHere != null)
             m_ItemInHere.m_InInventorySlot = null;
         m_ItemInHere = null;
         m_ItemIcon.sprite = null;
+        if(m_SlotType != EquipmentSlot.Inventory)
+            m_ItemIcon.transform.parent.gameObject.SetActive(false);
         m_ItemIcon.gameObject.SetActive(false);
     }
     public void LoadItem(BaseGear gearInHere)
@@ -22,6 +24,8 @@ public class InventorySlot : MonoBehaviour
         m_ItemInHere = gearInHere;
         m_ItemIcon.sprite = gearInHere.m_GearSprite;
         gearInHere.m_InInventorySlot = this;
+        if(m_SlotType != EquipmentSlot.Inventory)
+            m_ItemIcon.transform.parent.gameObject.SetActive(true);
         m_ItemIcon.gameObject.SetActive(true);
     }
 
@@ -38,8 +42,8 @@ public class InventorySlot : MonoBehaviour
     [Button]
     public void SelectSlot()
     {
-        VisualInventoryManager visualInventoryManager = GetComponentInParent<VisualInventoryManager>();
-        if (m_SlotType == LoadoutSlots.Inventory)
+        VisualInventoryManager visualInventoryManager = VisualInventoryManager.Instance;
+        if (m_SlotType == EquipmentSlot.Inventory)
         {
             visualInventoryManager.SelectInventorySlot(this);
         }
@@ -51,7 +55,7 @@ public class InventorySlot : MonoBehaviour
 
     public bool CheckItemAllowed(BaseGear gear)
     {
-        foreach (var slotType in gear.m_AllowedLoadoutSlots)
+        foreach (var slotType in gear.m_AllowedEquipmentSlots)
         {
             if (slotType == m_SlotType)
                 return true;

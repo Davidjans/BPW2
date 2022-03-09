@@ -28,7 +28,7 @@ MonoBehaviour:
   m_TypeName: BaseGear
   m_InLoadout: 0
   m_LinkedGameObject: {fileID: 0}
-  m_AllowedLoadoutSlots: 
+  m_AllowedEquipmentSlots: 00000000
   m_GearSprite: {fileID: 21300000, guid: 0c4164dc68deefb479d1a2b7f111a193, type: 3}
   m_OriginalGearLink: {fileID: 0}
   m_InInventorySlot: {fileID: 0}

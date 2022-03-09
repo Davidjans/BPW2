@@ -80,13 +80,13 @@ public class VisualInventoryManager : MonoBehaviour
         
         m_SelectedSlot = slotSelected;
         //m_SelectedSlot.gameObject.SetActive(true);
-        m_SelectedItemImage.transform.parent = m_SelectedSlot.transform;
+        m_SelectedItemImage.transform.SetParent(m_SelectedSlot.transform,true);
         m_SelectedItemImage.transform.position = m_SelectedSlot.transform.position;
     }
     public void SelectLoadoutSlot(InventorySlot slotSelected)
     {
         SelectSlot(slotSelected);
-        if (m_PreviouslySelectedSlot != null && m_PreviouslySelectedSlot.m_SlotType == LoadoutSlots.Inventory &&
+        if (m_PreviouslySelectedSlot != null && m_PreviouslySelectedSlot.m_SlotType == EquipmentSlot.Inventory &&
             m_PreviouslySelectedSlot.m_ItemInHere != null && m_SelectedSlot.CheckItemAllowed(m_PreviouslySelectedSlot.m_ItemInHere)
             && m_PreviouslySelectedSlot.m_ItemInHere.m_InLoadout == false)
         {
@@ -98,7 +98,7 @@ public class VisualInventoryManager : MonoBehaviour
     public void SelectInventorySlot(InventorySlot slotSelected)
     {
         SelectSlot(slotSelected);
-        if (m_PreviouslySelectedSlot.m_SlotType != LoadoutSlots.Inventory &&
+        if (m_PreviouslySelectedSlot != null && m_PreviouslySelectedSlot.m_SlotType != EquipmentSlot.Inventory  &&
             slotSelected.m_ItemInHere == null && m_PreviouslySelectedSlot.m_ItemInHere != null)
         {
             m_PreviouslySelectedSlot.m_ItemInHere.m_InLoadout = false;

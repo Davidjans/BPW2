@@ -48,7 +48,6 @@ public class PathfindingManager : SerializedMonoBehaviour
             {
                 for (int i = 0; i < path.Count -1; i++)
                 {
-                    Debug.LogError("its doing this");
                     Debug.DrawLine(new Vector3(path[i].m_WorldPosition.x,path[i].m_WorldPosition.y,path[i].m_WorldPosition.z) + (new Vector3(1,0,1) * m_Grid.m_CellSize) * 0.5f ,
                         new Vector3(path[i +1].m_WorldPosition.x,path[i +1].m_WorldPosition.y,path[i +1].m_WorldPosition.z)+ (new Vector3(1,0,1) * m_Grid.m_CellSize) * 0.5f, 
                         Color.green,1000f);

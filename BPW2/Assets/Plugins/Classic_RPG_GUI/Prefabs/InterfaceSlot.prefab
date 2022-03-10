@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3350596021085549129}
   - component: {fileID: 7731570424518560072}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: SlotBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +84,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5721292779492715974}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 7580116808875702385}
   - component: {fileID: 8438339416306601568}
   - component: {fileID: 3923624415985829806}
+  - component: {fileID: 8766472959566791772}
   m_Layer: 5
   m_Name: InterfaceSlot
   m_TagString: Untagged
@@ -197,6 +198,32 @@ MonoBehaviour:
   m_ItemIcon: {fileID: 2283849424045839791}
   m_ItemInHere: {fileID: 0}
   m_SlotType: 12
+--- !u!61 &8766472959566791772
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6032142605062562954}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 65, y: 65}
+  m_EdgeRadius: 0
 --- !u!1 &7673293342147283880
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,7 +236,7 @@ GameObject:
   - component: {fileID: 4523494899602989214}
   - component: {fileID: 2588520051333691676}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: SlotBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -285,7 +312,7 @@ GameObject:
   - component: {fileID: 3203668381105917795}
   - component: {fileID: 2283849424045839791}
   m_Layer: 5
-  m_Name: Image
+  m_Name: SlotIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

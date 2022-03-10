@@ -1,14 +1,42 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-public class InventorySlot : MonoBehaviour
+using UnityEngine.EventSystems;
+public class InventorySlot : MonoBehaviour , IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Image m_ItemIcon;
     public BaseGear m_ItemInHere;
     public EquipmentSlot m_SlotType = EquipmentSlot.Inventory;
+    
+    private bool m_MouseOver = false;
+    void Update()
+    {
+        if (m_MouseOver)
+        {
+            Debug.LogError("its over");
+            if (Input.GetMouseButtonDown(0))
+            {
+                SelectSlot();
+                Debug.LogError("its over2");
+            }
+        }
+    }
+ 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        m_MouseOver = true;
+        Debug.Log("Mouse enter");
+    }
+ 
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        m_MouseOver = false;
+        Debug.Log("Mouse exit");
+    }
     public void ClearSlot()
     {
         if(m_ItemInHere != null)
@@ -46,6 +74,7 @@ public class InventorySlot : MonoBehaviour
         if (m_SlotType == EquipmentSlot.Inventory)
         {
             visualInventoryManager.SelectInventorySlot(this);
+            InterFaceMouseManager.Instance.MakeNewFollowingItem(this.gameObject);
         }
         else
         {

@@ -4,17 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Julian.MapSystem
+namespace EVN.MapSystem
 {
     public class RoomNode : MonoBehaviour
     {
+        [FoldoutGroup("ReadOnly")] [ReadOnly] public bool Revealed { get; private set; }
+        [FoldoutGroup("ReadOnly")] [ReadOnly] public bool Available { get; private set; }
+        [FoldoutGroup("ReadOnly")] [ReadOnly] public bool Active { get; private set; }
+
         [FoldoutGroup("ReadOnly")] [ReadOnly] public int Index;
-        [FoldoutGroup("ReadOnly")] [ReadOnly] public bool Revealed;
-        [FoldoutGroup("ReadOnly")] [ReadOnly] public bool Availible;
-        [FoldoutGroup("ReadOnly")] [ReadOnly] public bool PlayerAtNode;
         [FoldoutGroup("ReadOnly")] [ReadOnly] public Row Row;
+        [FoldoutGroup("ReadOnly")] [ReadOnly] public RingMap ParentRingMap;
         [FoldoutGroup("ReadOnly")] [ReadOnly] public List<RoomNode> Exits = new List<RoomNode>();
         [FoldoutGroup("ReadOnly")] [ReadOnly] public List<RoomNode> Entrances = new List<RoomNode>();
+
 
         [FoldoutGroup("ReadOnly")]
         [ReadOnly]
@@ -28,8 +31,62 @@ namespace Julian.MapSystem
 
 
         [FoldoutGroup("Node Settings")]
-        [SerializeField] private Image nodeIcon;
+        [SerializeField] private Image m_NodeIcon;
+        [SerializeField] private Animator m_NodeAnimator;
 
+        private void Start()
+        {
+            m_NodeAnimator.Play("BecomeActive_Reverse", 1, 1);
+            m_NodeAnimator.Play("RevealNode_Reverse", 2, 1);
+            m_NodeAnimator.Play("BecomeAvailible_Reverse", 3, 1);
+        }
+
+        public void OnPress()
+        {
+            bool unlocked = false;
+
+            // If the node can be unlocked
+            if (Row.Cost <= ParentRingMap.MapManager.Intel && Available)
+            {
+                ParentRingMap.MapManager.SetIntel(ParentRingMap.MapManager.Intel - Row.Cost);
+               
+                SetRevealed(true);
+
+                ParentRingMap.UpdateAvalibleNodes();
+
+                unlocked = true;
+            }
+
+            if (!unlocked)
+            {
+                m_NodeAnimator.SetTrigger("FailPress");
+            }
+        }
+
+
+        public void SetAvailable(bool available)
+        {
+            Available = available;
+        }
+
+        public void SetRevealed(bool revealed)
+        {
+            Revealed = revealed;
+        }
+
+        public void SetActive(bool active)
+        {
+            Active = active;
+        }
+
+
+        // Animator needs to update every frame for no reason but it only works here so thats why maybe look at it in the future lol hello person reading this
+        private void LateUpdate()
+        {
+            m_NodeAnimator.SetBool("Available", Available);
+            m_NodeAnimator.SetBool("Revealed", Revealed);
+            m_NodeAnimator.SetBool("Active", Active);
+        }
 
 
         public void SetRoomSettings(RoomSettings roomSettings, GlobalRoomSettings globalRoomSettings)
@@ -37,7 +94,7 @@ namespace Julian.MapSystem
             RoomSettings = roomSettings;
             m_GlobalRoomSettings = globalRoomSettings;
 
-            nodeIcon.sprite = m_GlobalRoomSettings.RoomIcon;
+            m_NodeIcon.sprite = m_GlobalRoomSettings.RoomIcon;
         }
     }
 }

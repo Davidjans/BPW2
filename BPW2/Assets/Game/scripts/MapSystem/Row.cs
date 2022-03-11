@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace Julian.MapSystem
+namespace EVN.MapSystem
 {
     public class Row : MonoBehaviour
     {
@@ -16,7 +16,7 @@ namespace Julian.MapSystem
         public void SetCost(int cost)
         {
             Cost = cost;
-            m_CostTextGUI.text = cost.ToString();
+            m_CostTextGUI.text = cost <= 0 ? "X" : cost.ToString();
         }
 
         [ReadOnly] public List<RoomNode> Nodes = new List<RoomNode>();

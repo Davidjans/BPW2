@@ -1,7 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Julian.MapSystem
+namespace EVN.MapSystem
 {
     [CreateAssetMenu(fileName = "New Global Room Settings", menuName = "Global Room Settings", order = 1)]
     public class GlobalRoomSettings : ScriptableObjectFileEdit

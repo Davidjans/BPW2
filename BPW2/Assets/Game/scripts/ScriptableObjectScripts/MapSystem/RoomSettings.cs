@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Julian.MapSystem
+namespace EVN.MapSystem
 {
     [CreateAssetMenu(fileName = "New Room Settings", menuName = "Room Settings", order = 1)]
     public class RoomSettings : ScriptableObjectFileEdit

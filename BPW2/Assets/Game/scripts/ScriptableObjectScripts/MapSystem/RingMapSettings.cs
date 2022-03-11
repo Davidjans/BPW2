@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Julian.MapSystem
+namespace EVN.MapSystem
 { 
     [CreateAssetMenu(fileName = "New RingMapSettings", menuName = "RingMapSettings", order = 1)]
     public class RingMapSettings : ScriptableObject

@@ -1,59 +1,119 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Sirenix.OdinInspector;
 
-namespace Julian.MapSystem
+namespace EVN.MapSystem
 {
     public class MapManager : MonoBehaviour
     {
 
-        [SerializeField] private RingMapSettings m_mapSettings;
+        public static MapManager Instance;
 
-        private int m_PlayerPosition;
-
+        private RingMap m_ActiveMap;
+        private List<RingMap> m_RingMaps = new List<RingMap>();
+        private RoomAssets m_RoomAssets;
 
         [FoldoutGroup("Static Settings")]
         [SerializeField]
         private RingMap m_RingMapPrefab;
+
         [FoldoutGroup("Static Settings")]
         [SerializeField]
         private ScrollRect m_ScrollRect;
+
+        [FoldoutGroup("Static Settings")]
+        [SerializeField]
+        private TextMeshProUGUI m_IntelText;
+
         [FoldoutGroup("Static Settings")]
         [SerializeField]
         private Transform m_ScrollRectViewport;
 
-        private RoomAssets roomAssets;
+        [FoldoutGroup("Testing")]
+        [SerializeField] private RingMapSettings m_TestRingMapSettings;
+
+
+        public int Intel { get; private set; }
 
 
         private void Awake()
         {
-            DontDestroyOnLoad(gameObject);
-            roomAssets = new RoomAssets();
-            roomAssets.LoadAssets();
-        }
+            // Create a singleton
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+                return;
+            }
 
+            DontDestroyOnLoad(gameObject);
+
+            m_RoomAssets = new RoomAssets();
+        }
 
 
         private void Start()
         {
-            // testing
+            SetIntel(13);
+            SetRingMapActive(AddRingMap(m_TestRingMapSettings));
+        }
+
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.P))
+            {
+                m_ActiveMap.MovePlayer(m_ActiveMap.m_Rows[m_ActiveMap.ActiveNode.Row.Index + 1].Nodes[0]);
+            }
+        }
+
+
+        public void SetIntel(int intel)
+        {
+            Intel = intel;
+            m_IntelText.text = intel.ToString();
+        }
+
+        public void SetRingMapActive(RingMap mapToSetActive)
+        {
+            // Show the ring map and hide the others
+            for (int i = 0; i < m_RingMaps.Count; i++)
+            {
+                m_RingMaps[i].gameObject.SetActive(m_RingMaps[i] == mapToSetActive);
+            }
+
+            mapToSetActive.gameObject.SetActive(true);
+            m_ScrollRect.content = (RectTransform)mapToSetActive.transform;
+
+            m_ActiveMap = mapToSetActive;
+        }
+
+        public RingMap AddRingMap(RingMapSettings mapSettings)
+        {     
             RingMap newMap = Instantiate(m_RingMapPrefab, m_ScrollRectViewport);
-            newMap.GenerateMap(m_mapSettings, roomAssets);
-            m_ScrollRect.content = (RectTransform)newMap.transform;
+            newMap.GenerateMap(mapSettings, m_RoomAssets,this);
+
+            m_RingMaps.Add(newMap);
+            newMap.gameObject.SetActive(false);
+
+            return newMap;
         }
 
     }
 
-
+    /// <summary>
+    /// This class will find and so contain all the types of room/mapSystem related assets
+    /// </summary>
     public class RoomAssets
     {
         private Dictionary<RoomType, GlobalRoomSettings> m_GlobalRoomSettings;
         private Dictionary<RoomType, List<RoomSettings>> m_Rooms;
 
-        public void LoadAssets()
+        public RoomAssets()
         {
             // Crate new Dictionarys
             m_GlobalRoomSettings = new Dictionary<RoomType, GlobalRoomSettings>();
@@ -83,8 +143,8 @@ namespace Julian.MapSystem
 
                 m_Rooms[room.RoomType].Add(room);
             }
-
         }
+
 
         public RoomSettings GetRandomRoom(RoomType roomType)
         {
@@ -116,7 +176,6 @@ namespace Julian.MapSystem
 
             return m_GlobalRoomSettings[roomType];
         }
-
     }
 
 

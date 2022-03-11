@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Sirenix.OdinInspector;
 
-namespace Julian.MapSystem
+namespace EVN.MapSystem
 {
     public class RingMap : MonoBehaviour
     {
@@ -20,21 +20,91 @@ namespace Julian.MapSystem
         [SerializeField] private Color m_RowColor1;
         [SerializeField] private Color m_RowColor2;
 
+
         [Space(10f)]
 
-        [ReadOnly] 
-        public Row[] m_Rows;
+        [ReadOnly] public Row[] m_Rows;
+        [ReadOnly] public Line[] m_Lines;
+        [ReadOnly] public RoomNode ActiveNode { get; private set; }
+        [ReadOnly] public MapManager MapManager { get; private set; }
 
-        [ReadOnly] 
-        public Line[] m_Lines;
 
-      
+        public void MovePlayer(RoomNode toNode)
+        {
+            // Disable the old node
+            if (ActiveNode != null)
+                ActiveNode.SetActive(false);
+
+            ActiveNode = toNode;
+
+            UpdateRowCosts(ActiveNode.Row.Index);
+
+            // Set the Active node to reveled
+            ActiveNode.SetRevealed(true);
+            ActiveNode.SetActive(true);
+
+
+            UpdateAvalibleNodes();
+        }
+
+
+        public void UpdateAvalibleNodes()
+        {
+            // Reset All Nodes
+            for (int r = 0; r < m_Rows.Length; r++)
+            {
+                for (int n = 0; n < m_Rows[r].Nodes.Count; n++)
+                {
+                    m_Rows[r].Nodes[n].SetAvailable(false);
+                }
+            }
+
+
+            // Set the first exits of the active node to availible
+            for (int n = 0; n < ActiveNode.Exits.Count; n++)
+            {
+                // If there is not enough intel for the first exits return the function
+                if (ActiveNode.Exits[n].Row.Cost > MapManager.Intel)
+                    return;
+
+                ActiveNode.Exits[n].SetAvailable(true);
+            }
+
+
+            // Set nodes available
+            for (int r = 0; r < m_Rows.Length; r++)
+            {
+                if (m_Rows[r].Cost > MapManager.Intel)
+                    break;
+
+                for (int n = 0; n < m_Rows[r].Nodes.Count; n++)
+                {
+                    RoomNode checkNode = m_Rows[r].Nodes[n];
+
+                    // Set the node to available if on of the entrances is also active
+                    for (int e = 0; e < checkNode.Entrances.Count; e++)
+                    {
+                        if (checkNode.Entrances[e].Available)
+                        {
+                            checkNode.SetAvailable(true);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        #region MapGeneration
 
         /// <summary>
         /// Generates the map based on settings
         /// </summary>
-        public void GenerateMap(RingMapSettings settings, RoomAssets roomAssets)
+        public void GenerateMap(RingMapSettings settings, RoomAssets roomAssets, MapManager mapManager)
         {
+
+            // Set map manager
+            MapManager = mapManager;
+
             // Create the rows
             SetContentRectSize(settings.Spacing, settings.RowCount);
             CreateRows(settings.RowCount);
@@ -55,6 +125,9 @@ namespace Julian.MapSystem
 
             // Sets the rooms for every room node
             SetRoomOnNodes(settings.FirstRoomType, settings.lastRoomType, roomAssets, settings.ForcedRooms);
+
+            // Move player to the first node
+            MovePlayer(m_Rows[0].Nodes[0]);
         }
 
 
@@ -169,6 +242,7 @@ namespace Julian.MapSystem
                     // Set the roomNode property's \\
                     roomNode.Row = m_Rows[r];
                     roomNode.Index = n;
+                    roomNode.ParentRingMap = this;
                 }
             }
         }
@@ -415,8 +489,11 @@ namespace Julian.MapSystem
 
                     }
 
-
                     node.SetRoomSettings(roomAssets.GetRandomRoom(finalRoomType),roomAssets.GetGlobalRoom(finalRoomType));
+
+                    node.SetActive(false);
+                    node.SetAvailable(false);
+                    node.SetRevealed(false);
                 }
             }
 
@@ -558,6 +635,8 @@ namespace Julian.MapSystem
 
             return cross;
         }
+
+        #endregion
 
     }
 

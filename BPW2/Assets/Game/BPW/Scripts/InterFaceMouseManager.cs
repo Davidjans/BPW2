@@ -37,9 +37,12 @@ public class InterFaceMouseManager : MonoBehaviour
         }
     }
     #endregion
+
+    public InventorySlot m_SlotHolding;
     public Transform m_ChildFollowing;
     public bool m_ShouldMakeChildFollow;
     public BaseGear m_GearHolding;
+    public InventorySlot m_CurrentlyOver;
     void Update()
     {
         if (m_ShouldMakeChildFollow & m_ChildFollowing != null)
@@ -54,31 +57,34 @@ public class InterFaceMouseManager : MonoBehaviour
 
     public void OnMouseUpCustom()
     {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-    
-        if (Physics.Raycast(ray, out hit)) {
-            Debug.LogError(hit.transform.gameObject);
-            InventorySlot slot = hit.transform.GetComponent<InventorySlot>();
-            if(slot != null && slot != m_ChildFollowing.GetComponent<InventorySlot>())
-                slot.SelectSlot();
-        }
+            
+        if(m_CurrentlyOver != null && m_CurrentlyOver != m_SlotHolding)
+            m_CurrentlyOver.SelectSlot();
         Destroy(m_ChildFollowing.gameObject);
+        m_ShouldMakeChildFollow = false;
         m_GearHolding = null;
     }
 
     public void MakeNewFollowingItem(GameObject objectToChild)
     {
+        if (Input.GetMouseButtonUp(0))
+            return; 
         m_ChildFollowing = Instantiate(objectToChild, objectToChild.transform.position,objectToChild.transform.rotation,transform).transform;
-        InventorySlot inventorySlot = GetComponentInChildren<InventorySlot>();
+        m_SlotHolding = objectToChild.GetComponentInChildren<InventorySlot>();
+        InventorySlot inventorySlot = m_ChildFollowing.GetComponentInChildren<InventorySlot>();
+        
         if (inventorySlot != null)
         {
             m_GearHolding = inventorySlot.m_ItemInHere;
+            Destroy(inventorySlot);
+            Destroy(inventorySlot.GetComponentInChildren<Collider>());
         }
         Image[] allImages = m_ChildFollowing.GetComponentsInChildren<Image>();
         foreach (var image in allImages)
         {
             image.raycastTarget = false;
         }
+        
+        m_ShouldMakeChildFollow = true;
     }
 }

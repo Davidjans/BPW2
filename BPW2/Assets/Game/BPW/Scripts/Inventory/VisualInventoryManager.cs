@@ -43,7 +43,7 @@ public class VisualInventoryManager : MonoBehaviour
     public InventorySlot m_SelectedSlot;
     public InventorySlot m_PreviouslySelectedSlot;
     public Image m_SelectedItemImage;
-   
+    
 
     public void SetVisualInventory()
     {
@@ -82,12 +82,14 @@ public class VisualInventoryManager : MonoBehaviour
         //m_SelectedSlot.gameObject.SetActive(true);
         m_SelectedItemImage.transform.SetParent(m_SelectedSlot.transform,true);
         m_SelectedItemImage.transform.position = m_SelectedSlot.transform.position;
+        m_SelectedItemImage.transform.parent = transform.root;
     }
     public void SelectLoadoutSlot(InventorySlot slotSelected)
     {
         SelectSlot(slotSelected);
         if (m_PreviouslySelectedSlot != null && m_PreviouslySelectedSlot.m_SlotType == EquipmentSlot.Inventory &&
-            m_PreviouslySelectedSlot.m_ItemInHere != null && m_SelectedSlot.CheckItemAllowed(m_PreviouslySelectedSlot.m_ItemInHere)
+            m_PreviouslySelectedSlot.m_ItemInHere != null && 
+            m_SelectedSlot != null && m_SelectedSlot.CheckItemAllowed(m_PreviouslySelectedSlot.m_ItemInHere)
             && m_PreviouslySelectedSlot.m_ItemInHere.m_InLoadout == false)
         {
             m_SelectedSlot.LoadItem(m_PreviouslySelectedSlot.m_ItemInHere);

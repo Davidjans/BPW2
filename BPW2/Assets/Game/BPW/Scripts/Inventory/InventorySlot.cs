@@ -17,11 +17,9 @@ public class InventorySlot : MonoBehaviour , IPointerEnterHandler, IPointerExitH
     {
         if (m_MouseOver)
         {
-            Debug.LogError("its over");
             if (Input.GetMouseButtonDown(0))
             {
                 SelectSlot();
-                Debug.LogError("its over2");
             }
         }
     }
@@ -29,13 +27,14 @@ public class InventorySlot : MonoBehaviour , IPointerEnterHandler, IPointerExitH
     public void OnPointerEnter(PointerEventData eventData)
     {
         m_MouseOver = true;
-        Debug.Log("Mouse enter");
+        InterFaceMouseManager.Instance.m_CurrentlyOver = this;
     }
  
     public void OnPointerExit(PointerEventData eventData)
     {
         m_MouseOver = false;
-        Debug.Log("Mouse exit");
+        if(InterFaceMouseManager.Instance.m_CurrentlyOver == this)
+            InterFaceMouseManager.Instance.m_CurrentlyOver = null;
     }
     public void ClearSlot()
     {

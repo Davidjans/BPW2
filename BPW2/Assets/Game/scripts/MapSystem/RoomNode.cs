@@ -2,11 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace EVN.MapSystem
 {
-    public class RoomNode : MonoBehaviour
+    public class RoomNode : MonoBehaviour, IPointerClickHandler
     {
         [FoldoutGroup("ReadOnly")] [ReadOnly] public bool Revealed { get; private set; }
         [FoldoutGroup("ReadOnly")] [ReadOnly] public bool Available { get; private set; }
@@ -17,7 +18,7 @@ namespace EVN.MapSystem
         [FoldoutGroup("ReadOnly")] [ReadOnly] public RingMap ParentRingMap;
         [FoldoutGroup("ReadOnly")] [ReadOnly] public List<RoomNode> Exits = new List<RoomNode>();
         [FoldoutGroup("ReadOnly")] [ReadOnly] public List<RoomNode> Entrances = new List<RoomNode>();
-
+        
 
         [FoldoutGroup("ReadOnly")]
         [ReadOnly]
@@ -34,14 +35,32 @@ namespace EVN.MapSystem
         [SerializeField] private Image m_NodeIcon;
         [SerializeField] private Animator m_NodeAnimator;
 
+        [FoldoutGroup("Assigning")] public SideNodeManager m_SideNodeManager;
+
         private void Start()
         {
             m_NodeAnimator.Play("BecomeActive_Reverse", 1, 1);
             m_NodeAnimator.Play("RevealNode_Reverse", 2, 1);
             m_NodeAnimator.Play("BecomeAvailible_Reverse", 3, 1);
         }
-
-        public void OnPress()
+        
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                OnPressLeft();
+            }
+            else if (eventData.button == PointerEventData.InputButton.Middle)
+            {
+                
+            }
+            else if (eventData.button == PointerEventData.InputButton.Right)
+            {
+                OnPressRight();
+            }
+        }
+        
+        public void OnPressLeft()
         {
             bool unlocked = false;
 
@@ -60,6 +79,15 @@ namespace EVN.MapSystem
             if (!unlocked)
             {
                 m_NodeAnimator.SetTrigger("FailPress");
+            }
+        }
+
+        public void OnPressRight()
+        {
+            if (Revealed)
+            {
+                m_SideNodeManager.m_Expanded = !m_SideNodeManager.m_Expanded;
+                m_NodeAnimator.SetBool("ExpandSide", m_SideNodeManager.m_Expanded);
             }
         }
 

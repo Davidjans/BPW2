@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SkillSystem
 {
-    [CreateAssetMenu(menuName = "Skill System/Player/Create Skill")]
+    [CreateAssetMenu(menuName = "StackedBeans/Skill System/Player/Create Skill")]
     public class Skills : ScriptableObject
     {
         public string m_Description;

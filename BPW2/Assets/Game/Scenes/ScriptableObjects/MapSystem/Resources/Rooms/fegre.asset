@@ -15,5 +15,17 @@ MonoBehaviour:
   NewName: 
   RoomType: 1
   BaseSceneName: 
+  m_AdditionalRoomInfo:
+  - {fileID: 11400000, guid: 806e965e63d54694d8de6f84a9b5416e, type: 2}
   SideInfoToggles:
-    Toggles: []
+    Toggles:
+    - m_enumName: Chest
+      m_enumEnabled: 1
+    - m_enumName: HostileType
+      m_enumEnabled: 1
+    - m_enumName: RoomHazards
+      m_enumEnabled: 1
+    - m_enumName: RoomModifyers
+      m_enumEnabled: 1
+    - m_enumName: Secret
+      m_enumEnabled: 1

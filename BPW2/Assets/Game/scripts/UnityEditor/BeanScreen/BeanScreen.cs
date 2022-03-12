@@ -37,7 +37,7 @@ public class BeanScreen : OdinMenuEditorWindow
 
         // Adds the character overview table.
         tree.Add("RoomSettings/GlobalRooms", new GlobalRoomTable());
-
+        
 
         GlobalSettings globalSettings = new GlobalSettings();
         globalSettings.Start();

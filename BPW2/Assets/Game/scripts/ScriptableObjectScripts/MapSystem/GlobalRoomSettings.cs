@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace EVN.MapSystem
 {
-    [CreateAssetMenu(fileName = "New Global Room Settings", menuName = "Global Room Settings", order = 1)]
+    [CreateAssetMenu(fileName = "New Global Room Settings", menuName = "StackedBeans/MapSystem/Global Room Settings", order = 1)]
     public class GlobalRoomSettings : ScriptableObjectFileEdit
     {
 

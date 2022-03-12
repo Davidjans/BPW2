@@ -28,6 +28,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: 0.3826836, w: 0.92387944}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4679220765003229106}
   m_RootOrder: 3
@@ -104,6 +105,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8227301330093121129}
   m_RootOrder: 1
@@ -174,6 +176,7 @@ GameObject:
   - component: {fileID: 1468904548128303784}
   - component: {fileID: 3460033464606733396}
   - component: {fileID: 1259629198337866133}
+  - component: {fileID: 8765836832190608072}
   m_Layer: 5
   m_Name: Side Info
   m_TagString: Untagged
@@ -191,6 +194,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: 0.7071069, w: 0.7071067}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3727087200656641997}
   - {fileID: 462140841535932614}
@@ -242,6 +246,20 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &8765836832190608072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3210601267479292064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d39b55e3beb609d4f97586cad8ff1671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SideNodesOwned: []
+  m_Expanded: 0
 --- !u!1 &3719706654656773933
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,6 +288,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: 0.92387956, w: 0.38268346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4679220765003229106}
   m_RootOrder: 0
@@ -346,6 +365,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8227301330093121129}
   m_RootOrder: 2
@@ -435,6 +455,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.6887941, y: 1.6887941, z: 1.6887941}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 176617331552833073}
   - {fileID: 6368578699276115937}
@@ -483,7 +504,7 @@ MonoBehaviour:
   m_RotationOffset: 90
 --- !u!95 &7187134927059373892
 Animator:
-  serializedVersion: 3
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -496,6 +517,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -540,6 +562,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: 0.9238795, w: -0.38268352}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4679220765003229106}
   m_RootOrder: 1
@@ -615,6 +638,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0.38268337, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4679220765003229106}
   m_RootOrder: 2
@@ -691,6 +715,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8227301330093121129}
   m_RootOrder: 0
@@ -780,6 +805,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3104175560208687365}
   - {fileID: 5067923115394834128}
@@ -818,15 +844,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 0
   Row: {fileID: 0}
-  Map: {fileID: 0}
+  ParentRingMap: {fileID: 0}
   Exits: []
   Entrances: []
   m_GlobalRoomSettings: {fileID: 0}
   m_NodeIcon: {fileID: 5353084176098531107}
   m_NodeAnimator: {fileID: 5518037211608132381}
+  m_SideNodeManager: {fileID: 8765836832190608072}
 --- !u!95 &5518037211608132381
 Animator:
-  serializedVersion: 3
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -839,6 +866,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -850,7 +878,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8227301330093121128}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -889,7 +917,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6825816020324769403}
         m_TargetAssemblyTypeName: Julian.MapSystem.RoomNode, Assembly-CSharp
-        m_MethodName: OnPress
+        m_MethodName: OnPressLeft
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -928,6 +956,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8227301330093121129}
   m_RootOrder: 6
@@ -1016,6 +1045,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8227301330093121129}
   m_RootOrder: 3

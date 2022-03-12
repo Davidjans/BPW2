@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace EVN.MapSystem
 { 
-    [CreateAssetMenu(fileName = "New RingMapSettings", menuName = "RingMapSettings", order = 1)]
+    [CreateAssetMenu(fileName = "New RingMapSettings", menuName = "StackedBeans/MapSystem/RingMapSettings", order = 1)]
     public class RingMapSettings : ScriptableObject
     {
         public int RowCount = 7;

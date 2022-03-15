@@ -43,7 +43,10 @@ namespace EVN.MapSystem
             ActiveNode.SetRevealed(true);
             ActiveNode.SetActive(true);
 
-
+            foreach (var exit in ActiveNode.Exits)
+            {
+                exit.SetRevealed(true);
+            }
             UpdateAvalibleNodes();
         }
 
@@ -55,7 +58,11 @@ namespace EVN.MapSystem
             {
                 for (int n = 0; n < m_Rows[r].Nodes.Count; n++)
                 {
+                    
                     m_Rows[r].Nodes[n].SetAvailable(false);
+                    // keep availible if already revealed
+                    if(m_Rows[r].Nodes[n].Revealed)
+                        m_Rows[r].Nodes[n].SetAvailable(true);
                 }
             }
 

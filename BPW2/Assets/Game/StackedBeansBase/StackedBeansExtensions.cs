@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace StackedBeansUtils
+namespace StackedBeans.Utils
 {
     public static class StackedBeansExtensions
     {
@@ -30,6 +30,42 @@ namespace StackedBeansUtils
                         Object.Destroy(childTransform.GetComponent<MeshFilter>());
                 }
             }
+        }
+
+        public static Vector3 GetBoundsWorldPosition(this Collider collider,DirectionLeftToRight LtoR,DirectionBackToFront BtoF,DirectionTopToBottom TtoB = DirectionTopToBottom.Top)
+        {
+            Vector3 pos = collider.transform.position;
+            
+            switch (LtoR)
+            {
+                case DirectionLeftToRight.Left:
+                    pos.x -= collider.bounds.extents.x;
+                    break;
+                case DirectionLeftToRight.Right:
+                    pos.x += collider.bounds.extents.x;
+                    break;
+            }
+            
+            switch (BtoF)
+            {
+                case DirectionBackToFront.Back:
+                    pos.z += collider.bounds.extents.z;
+                    break;
+                case DirectionBackToFront.Front:
+                    pos.z -= collider.bounds.extents.z;
+                    break;
+            }
+            
+            switch (TtoB)
+            {
+                case DirectionTopToBottom.Bottom:
+                    pos.y -= collider.bounds.extents.y;
+                    break;
+                case DirectionTopToBottom.Top:
+                    pos.y += collider.bounds.extents.y;
+                    break;
+            }
+            return pos;
         }
     }
 

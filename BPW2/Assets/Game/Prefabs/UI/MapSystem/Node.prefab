@@ -258,6 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d39b55e3beb609d4f97586cad8ff1671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ParentNode: {fileID: 0}
   m_SideNodesOwned: []
   m_Expanded: 0
 --- !u!1 &3719706654656773933
@@ -1117,11 +1118,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Side Info Node (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 7154203752252219503, guid: 33383aea9e4fbf044a5fcbaabf83e5f7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7236341537567564928, guid: 33383aea9e4fbf044a5fcbaabf83e5f7,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1246,11 +1242,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Side Info Node (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7154203752252219503, guid: 33383aea9e4fbf044a5fcbaabf83e5f7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7236341537567564928, guid: 33383aea9e4fbf044a5fcbaabf83e5f7,
         type: 3}
@@ -1377,11 +1368,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Side Info Node
       objectReference: {fileID: 0}
-    - target: {fileID: 7154203752252219503, guid: 33383aea9e4fbf044a5fcbaabf83e5f7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7236341537567564928, guid: 33383aea9e4fbf044a5fcbaabf83e5f7,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1507,11 +1493,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Side Info Node (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 7154203752252219503, guid: 33383aea9e4fbf044a5fcbaabf83e5f7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7236341537567564928, guid: 33383aea9e4fbf044a5fcbaabf83e5f7,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1636,11 +1617,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Side Info Node (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7154203752252219503, guid: 33383aea9e4fbf044a5fcbaabf83e5f7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7236341537567564928, guid: 33383aea9e4fbf044a5fcbaabf83e5f7,
         type: 3}

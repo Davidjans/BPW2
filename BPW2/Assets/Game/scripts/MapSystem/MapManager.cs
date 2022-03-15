@@ -31,9 +31,13 @@ namespace EVN.MapSystem
         [SerializeField]
         private Transform m_ScrollRectViewport;
 
+        [FoldoutGroup("Static Settings")] [SerializeField]
+        private GameObject m_ContainingCanvas;
+        
         [FoldoutGroup("Testing")]
         [SerializeField] private RingMapSettings m_TestRingMapSettings;
-
+        [FoldoutGroup("Testing")]
+        [SerializeField] private int m_StartingIntelAmmount = 15;
 
         public int Intel { get; private set; }
 
@@ -59,7 +63,7 @@ namespace EVN.MapSystem
 
         private void Start()
         {
-            SetIntel(13);
+            SetIntel(m_StartingIntelAmmount);
             SetRingMapActive(AddRingMap(m_TestRingMapSettings));
         }
 
@@ -102,7 +106,15 @@ namespace EVN.MapSystem
 
             return newMap;
         }
+        public void ActivateCanvas()
+        {
+            m_ContainingCanvas.SetActive(false);
+        }
 
+        public void DeActivateCanvas()
+        {
+            m_ContainingCanvas.SetActive(true);
+        }
     }
 
     /// <summary>
@@ -176,8 +188,11 @@ namespace EVN.MapSystem
 
             return m_GlobalRoomSettings[roomType];
         }
+        
     }
-
+    
+    
+    
 
     // !!!Important!!!  NEVER REMOVE ITEM FROM THE LIST, ONLY ADD AT THE BOTTOM OR REPLACE
     public enum RoomType

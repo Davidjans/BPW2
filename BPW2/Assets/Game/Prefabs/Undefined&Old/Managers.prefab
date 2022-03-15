@@ -4021,6 +4021,7 @@ MonoBehaviour:
   m_AbilitiesParent: {fileID: 5473291151861603696}
   m_AbilityImages: []
   m_AbilitiesSelected: {fileID: 0}
+  m_WorldSpaceCanvas: {fileID: 0}
 --- !u!1 &5473291152443106796
 GameObject:
   m_ObjectHideFlags: 0

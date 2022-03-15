@@ -14,3 +14,16 @@ public enum EquipmentSlot
     LWeapon,
     Inventory
 }
+
+public enum SpawnNodeType
+{
+    Enviroment,
+    Entities,
+    Loot,
+    Traps
+}
+
+public enum RoomThemes
+{
+    NormalFantasy
+}

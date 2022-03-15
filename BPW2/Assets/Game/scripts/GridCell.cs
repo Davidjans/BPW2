@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Unity.Mathematics;
+using StackedBeans.Utils;
 
 public class GridCell
 {

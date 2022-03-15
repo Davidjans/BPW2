@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: StackedBeans
   productName: Eviction-Notice
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -156,7 +156,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Standalone: com.DefaultCompany.Eviction-Notice
+    Standalone: com.StackedBeans.Eviction-Notice
   buildNumber:
     Standalone: 0
     iPhone: 0
@@ -605,7 +605,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    Standalone: ODIN_INSPECTOR;ODIN_INSPECTOR_3;__MICROSPLAT__;AMPLIFY_SHADER_EDITOR;USING_URP
+    Standalone: ODIN_INSPECTOR;ODIN_INSPECTOR_3;__MICROSPLAT__;AMPLIFY_SHADER_EDITOR;USING_URP;JUPITER
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

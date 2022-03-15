@@ -62,6 +62,27 @@ namespace EVN.MapSystem
         
         public void OnPressLeft()
         {
+            if (!ParentRingMap.ActiveNode.Exits.Contains(this))
+            {
+                TryToRevealHidden();
+            }
+            else
+            {
+                TryToMoveTo();
+            }
+        }
+    
+        public void OnPressRight()
+        {
+            if (Revealed)
+            {
+                m_SideNodeManager.m_Expanded = !m_SideNodeManager.m_Expanded;
+                m_NodeAnimator.SetBool("ExpandSide", m_SideNodeManager.m_Expanded);
+            }
+        }
+
+        private void TryToRevealHidden()
+        {
             bool unlocked = false;
 
             // If the node can be unlocked
@@ -82,15 +103,10 @@ namespace EVN.MapSystem
             }
         }
 
-        public void OnPressRight()
+        private void TryToMoveTo()
         {
-            if (Revealed)
-            {
-                m_SideNodeManager.m_Expanded = !m_SideNodeManager.m_Expanded;
-                m_NodeAnimator.SetBool("ExpandSide", m_SideNodeManager.m_Expanded);
-            }
+            ParentRingMap.MovePlayer(this);
         }
-
 
         public void SetAvailable(bool available)
         {

@@ -119,7 +119,6 @@ public class RadialLayoutGroup : LayoutGroup
             child.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
             m_Tracker.Add(this, child, DrivenTransformProperties.Anchors | DrivenTransformProperties.AnchoredPosition | DrivenTransformProperties.Pivot);
-
         }
     }
 }

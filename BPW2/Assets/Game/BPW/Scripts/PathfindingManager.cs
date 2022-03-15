@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Pathfinding;
 using Sirenix.OdinInspector;
 using UnityEngine;
-
+using StackedBeans.Utils;
 public class PathfindingManager : SerializedMonoBehaviour
 {
     public int m_MoveStraightCost = 10;
